@@ -13,7 +13,7 @@ class Settings:
     EMBEDDING_MODEL: str = "BAAI/bge-small-en-v1.5"
     
     # API configurations
-    GROQ_API_KEY: str = "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"
+    GROQ_API_KEY: str 
     MAX_UPLOAD_SIZE_MB: int = 50
     
     class Config:
