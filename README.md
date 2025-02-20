@@ -10,10 +10,10 @@ An enterprise-grade solution for converting natural language questions into opti
 
 ## Features ✨
 
-- **Natural Language Understanding**: Transform plain English questions into executable SQL
+- **Natural Language Understanding**: Transform plain English questions into executable SQL Using llama-3.3-70b
 - **Semantic Schema Retrieval**: FAISS-powered vector search for relevant database schemas
 - **Secure Execution Engine**: Read-only SQL execution with query validation
-- **Production-Ready API**: FastAPI endpoints with JWT authentication
+- **Production-Ready API**: FastAPI endpoints 
 - **Scalable Infrastructure**: Background task processing and index sharding
 
 ## Table of Contents 📚
@@ -36,8 +36,8 @@ An enterprise-grade solution for converting natural language questions into opti
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/ai-sql-assistant.git
-cd ai-sql-assistant
+git clone https://github.com/amrr-hamed/Chating_SQL_Database.git
+cd chat_with_sql
 
 # Create virtual environment
 python -m venv venv
