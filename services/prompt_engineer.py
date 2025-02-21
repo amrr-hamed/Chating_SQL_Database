@@ -15,7 +15,7 @@ Rules:
 
     @classmethod
     def build_prompt(cls, question: str, schemas: List[str]) -> list:
-        print(schemas)
+        #print(schemas)
         return [
             {"role": "system", "content": cls.SYSTEM_PROMPT.format(schemas="\n\n".join(schemas))},
             {"role": "user", "content": f"Question: {question}\nSQL:"}

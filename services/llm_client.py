@@ -27,11 +27,32 @@ class GroqClient:
                 time.sleep(2 ** attempt)
         return None
 
+import re
+from typing import Optional
+
+class SQLExtractor:
+    
+    @staticmethod
+    def _is_safe_sql(query: str) -> bool:
+        """Check if the extracted SQL query is safe."""
+        dangerous_patterns = [
+            r"\bDROP\b", r"\bDELETE\b", r"\bALTER\b", r"\bTRUNCATE\b", r";--", r"' OR '1'='1'",
+            r"--", r"UNION.*SELECT", r"INSERT INTO", r"UPDATE .* SET"
+        ]
+        return not any(re.search(pattern, query, re.IGNORECASE) for pattern in dangerous_patterns)
+
     def _extract_sql(self, response: str) -> Optional[str]:
-        #print(response)
-        """Extract SQL code from markdown block"""
+        """Extract and validate SQL code from markdown block"""
         if '```sql' in response:
-            return response.split('```sql')[1].split('```')[0].strip()
-        if '```' in response:
-            return response.split('```')[1].strip()
-        return response
+            query = response.split('```sql')[1].split('```')[0].strip()
+        elif '```' in response:
+            query = response.split('```')[1].strip()
+        else:
+            return response  # No SQL block found
+        
+        # 🚨 **Security Check Before Returning Query**
+        if not self._is_safe_sql(query):
+            print("⚠️ WARNING: Potentially unsafe SQL detected! Query rejected.")
+            return None  # Reject unsafe queries
+        
+        return query
